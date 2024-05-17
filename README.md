@@ -2,7 +2,7 @@
 Dummy Plug for NVIDIA TensorRT-LLM used by transformers pipeline.
 
 ## Installation
-```
+```bash
 git clone https://github.com/bloodeagle40234/dp-trtllm
 cd dp-trtllm
 pip install .
@@ -12,7 +12,7 @@ pip install .
 Create DummyPlug instance via TensorRT-LLM engine directory, then
 pass the instance to transformers pipeline
 
-```
+```python
 from transformers import AutoTokenizer
 from transformers.pipelines import pipeline
 
@@ -30,6 +30,8 @@ pipe = pipeline(
     max_new_tokens=1024,
     device_map="cuda"
 )
+
+pipe("Hello, how are you?")
 ```
 
 ## References
