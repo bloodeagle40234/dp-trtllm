@@ -17,8 +17,8 @@ from transformers import AutoTokenizer
 from transformers.pipelines import pipeline
 
 tokenizer = AutoTokenizer.from_pretrained(
-    "<Tokenizer Path of base model>", device_map="cuda")
-model = DummyPlug("<TensorRT-LLM engine path>")
+    "<base model path>", device_map="cuda")
+model = DummyPlug("<engine path>")
 
 pipe = pipeline(
     "text-generation",
@@ -34,6 +34,20 @@ pipe = pipeline(
 pipe("Hello, how are you?")
 ```
 
+### Example: llm-jp-eval
+If you want to use DummyPlug for evaluation tool like llm-jp-eval,
+set DummyPlug class for model target. Note that addtional configigurations
+other than TensorRT-LLM's build config (e.g. dtype, device) will be ignored.
+
+
+```yaml
+model:
+  _target_: dp_trtllm.DummyPlug
+  pretrained_model_name_or_path: <engine path>
+```
+
+
 ## References
 - [NVIDIA TensorRT-LLM](https://github.com/NVIDIA/TensorRT-LLM)
 - [transformers](https://github.com/huggingface/transformers/tree/main)
+- [llm-jp-eval](https://github.com/llm-jp/llm-jp-eval)
