@@ -24,8 +24,8 @@ class DummyPlug(PreTrainedModel):
     This DummpyPlug class is intended to be used as Pre-Trained model
     for transformers pipeline.
     """
-    def __init__(self, engine_path):
-        self.engine_path = engine_path
+    def __init__(self, pretrained_model_name_or_path, **kwargs):
+        self.engine_path = pretrained_model_name_or_path
         self.runner = self._get_trt_instance()
         self.config = PretrainedConfig.from_dict(
             self.runner.session._model_config.__dict__)
@@ -37,6 +37,10 @@ class DummyPlug(PreTrainedModel):
     @property
     def _modules(self):
         return {}
+
+    @classmethod
+    def from_dir(cls, engine_path):
+        return cls(engine_path)
 
     def generate(self, **kwargs):
         batch_input_ids = kwargs.pop("input_ids")
