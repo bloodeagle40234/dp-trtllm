@@ -1,0 +1,2 @@
+tensorrt-llm>=0.9.0
+transformers
