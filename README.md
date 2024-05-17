@@ -15,6 +15,7 @@ pass the instance to transformers pipeline
 ```python
 from transformers import AutoTokenizer
 from transformers.pipelines import pipeline
+from dp_trtllm import DummyPlug
 
 tokenizer = AutoTokenizer.from_pretrained(
     "<base model path>", device_map="cuda")
